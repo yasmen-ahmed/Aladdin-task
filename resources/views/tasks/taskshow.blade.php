@@ -31,24 +31,13 @@
                 </tr>
                 @endforeach
             </tbody>
-    
-            {{-- @foreach ($completedTasks as $index => $task)
-            <tr class="{{ $index % 2 == 0 ? '' : 'table-secondary' }}">
-                <td>{{ $task->id }}</td>
-                <td>{{ $task->title }}</td>
-                <td>{{ $task->description }}</td>
-               
-            </tr>
-        @endforeach --}}
         </table>
     </div>
     
     <div>
-       
         <a href="{{ route('tasks.index') }}" class="btn btn-outline-dark p-2 m-2 btn-lg" >
             <i class="fa-solid fa-left-long fa-lg" style="color: #161717;"></i>
             Back</a>
-       
     </div>
   
 </div>  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

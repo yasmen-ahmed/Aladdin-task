@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body class="bg-light">
-  
-
     <!-- Your content here -->
     <br>
     <br>
@@ -18,7 +16,7 @@
             @csrf
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" name="title">
+                <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
                 @error('title')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -27,7 +25,7 @@
     
             <div class="form-group">
                 <label for="description">Description</label>
-                <input type="text" class="form-control" id="description" name="description">
+                <input type="text" class="form-control" id="description" name="description" value="{{ old('description') }}">
                 @error('description')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -35,7 +33,7 @@
     
             <div class="form-group">
                 <label for="due_date">Due Date</label>
-                <input type="date" class="form-control" id="due_date" name="due_date">
+                <input type="date" class="form-control" id="due_date" name="due_date" value="{{ old('due_date') }}">
                 <br>
                 @error('due_date')
                     <div class="alert alert-danger">{{ $message }}</div>

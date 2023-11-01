@@ -8,7 +8,6 @@
 <body>
     <!-- Your content here -->
     <br>
-    <br>
     <div class="container">
     <h1 class="m-3 p-2 text-center">Edit Task</h1>
     <div class="container border p-5 shadow-lg mb-5 bg-white rounded">
@@ -21,23 +20,25 @@
             
             @error('title')
             <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+            @enderror
         </div>
+
         <div class="form-group">
             <label for="description">Description</label>
             <textarea class="form-control" id="description" name="description" rows="3">{{ $task->description }}</textarea>
             @error('description')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+               <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
       
         <div class="form-group">
             <label for="due_date">Due Date</label>
             <input type="date" class="form-control" id="due_date" name="due_date" value="{{ $task->due_date }}">
-            @error('due_date')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
+             @error('due_date')
+                 <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
+        
         <button type="submit" class="btn btn-outline-info">Update Task</button>
         <a href="{{ route('tasks.index') }}" class="btn btn-outline-secondary">Back</a>
     </form>

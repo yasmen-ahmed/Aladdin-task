@@ -22,7 +22,6 @@ class TaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-
             'title' => 'required|max:20|unique:tasks',
             'description' => 'required|max:50',
             'due_date' => 'required|date|after:now',

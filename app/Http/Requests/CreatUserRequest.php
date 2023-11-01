@@ -27,15 +27,12 @@ class CreatUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "email" =>'required|unique:users',
-             'name'=>'required|max:25',
-              "password"=>'required|max:20',
-             
+            'email' => 'required|unique:users',
+            'name' => 'required|max:25',
+            'password' => 'required|max:20',    
         ];
     }
 
-
-    
     protected function failedValidation(Validator $validator)
     {
         $response = new JsonResponse([
