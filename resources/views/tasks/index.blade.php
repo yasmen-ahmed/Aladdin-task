@@ -13,11 +13,18 @@
     <div class="container text-center">
         <h1>Task Management System</h1>
 
-        <h2>Task List</h2> @if(session('success'))
+        <h2>Task List</h2>
+         @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
         @endif
+
+        @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
         <!-- Rest of your content -->
     </div>
 
@@ -28,6 +35,7 @@
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
+                    <th>User Id</th>
                     <th>Title</th>
                     <th>Description</th>
                     <th>Due Date</th>
@@ -37,6 +45,7 @@
             <tbody>
                 @foreach ($tasks as $task)
                 <tr>
+                    <td>{{ $task->user_id }}</td>
                     <td>{{ $task->title }}</td>
                     <td>{{ $task->description }}</td>
                     <td>{{ $task->due_date }}</td>
