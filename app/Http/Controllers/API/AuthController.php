@@ -13,33 +13,40 @@ class AuthController extends Controller
 {
     
     public function Register(CreatUserRequest $request){
-       
-        $user =new User();
-        $user->email=$request->email;
-        $user->name=$request->name;
-        $user->password=\Hash::make($request->password);
-        $user->save();
 
-        return [
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password)
+            ]);
+
+            return response()->json([
+            'status' => 'success',
+            'message' => 'Registration successful',
             '$user'=>$user,
             'token'=> $user->createToken('userTaken')->plainTextToken
-        ];
+             ], 201);
 
-
-
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error', 'message' => 'Something went wrong'], 500);
+        }
     }
-
 
     public function login(LoginRequest $request){
         
-       if(Auth::attempt($request->only('email','password'))){
-          return [
-            'user'=>Auth::user(),
-            'token'=>Auth::user()->createToken('ForRole')->plainTextToken
-        ];
-    }
-        else{
-            return "it's not a valiable";
+       if(Auth::attempt($request->only('email','password')))
+       {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Login successful',
+                '$user'=>Auth::user(),
+                'token'=> Auth::user()->createToken('userTaken')->plainTextToken
+                ], 201);
+        }
+        else
+        {
+            return response()->json(['error' => 'Your email and password are incorrect.'], 401);
         }
 
        }

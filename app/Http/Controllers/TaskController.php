@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +23,7 @@ class TaskController extends Controller
 
         
         public function store(TaskRequest $request )
-            {
+        {
 
                 $user = Auth::user();
                 // $task = Task::create($request->validated());
@@ -38,7 +37,7 @@ class TaskController extends Controller
                 $task->save();
 
                 return redirect()->route('tasks.index')->with('success', 'Task created successfully');
-            }
+        }
 
         public function edit(Task $task)
         {
@@ -54,7 +53,7 @@ class TaskController extends Controller
 
 
         public function update(TaskRequest $request, Task $task)
-            {
+        {
 
                 // Get the authenticated user
                 $user = auth()->user();
@@ -71,34 +70,32 @@ class TaskController extends Controller
                 ]);
 
                 return redirect()->route('tasks.index')->with('success', 'Task updated successfully');
-            }
+        }
 
         public function destroy(Task $task)
         {
-            
-                // Get the authenticated user
-                $user = auth()->user();
+            // Get the authenticated user
+            $user = auth()->user();
 
-                // Check if the authenticated user is the owner of the task
-                if ($user->id !== $task->user_id) {
-                    return redirect()->route('tasks.index')->with('error', 'You are not authorized to update this task');
-                }
+            // Check if the authenticated user is the owner of the task
+            if ($user->id !== $task->user_id) {
+                return redirect()->route('tasks.index')->with('error', 'You are not authorized to update this task');
+            }
 
             $task->delete();
-         return redirect()->route('tasks.index')->with('success','Task deleted successfully');
+            return redirect()->route('tasks.index')->with('success','Task deleted successfully');
         }
 
 
         public function complete(Task $task)
         {
-            
-                // Get the authenticated user
-                $user = auth()->user();
+            // Get the authenticated user
+            $user = auth()->user();
 
-                // Check if the authenticated user is the owner of the task
-                if ($user->id !== $task->user_id) {
-                    return redirect()->route('tasks.index')->with('error', 'You are not authorized to update this task');
-                }
+            // Check if the authenticated user is the owner of the task
+            if ($user->id !== $task->user_id) {
+                return redirect()->route('tasks.index')->with('error', 'You are not authorized to update this task');
+            }
 
             $task->update([
                 'completed'=>true,
@@ -109,8 +106,7 @@ class TaskController extends Controller
         
         public function showComplete()
         {
-            $completedTasks =Task::where (
-                'completed',true)->get();
+            $completedTasks =Task::where('completed',true)->get();
             return view('tasks.taskshow',compact('completedTasks'));
         }
 }

@@ -3,16 +3,17 @@
 <head>
     <!-- Other meta tags and CSS links -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
-<body>
+<body class="bg-light">
   
 
     <!-- Your content here -->
     <br>
     <br>
 <div class="container ">
-    <h1 class="m-5 p-2 text-center text-info border border-info">Create Task</h1>
-    <div class="container w-75">
+    <h1 class="m-3 p-2 text-center">Create Task</h1>
+    <div class="container border p-5 shadow-lg mb-5 bg-white rounded">
         <form action="{{ route('tasks.store') }}" method="POST">
             @csrf
             <div class="form-group">
@@ -41,8 +42,8 @@
                 @enderror
             </div>
     
-            <button type="submit" class="btn btn-info">Submit</button>
-            <a href="{{ route('tasks.index') }}" class="btn btn-secondary">Back</a>
+            <button type="submit" class="btn btn-outline-info">Submit</button>
+            <a href="{{ route('tasks.index') }}" class="btn btn-outline-secondary">Back</a>
         </form>
     </div>
     

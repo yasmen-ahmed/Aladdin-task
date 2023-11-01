@@ -25,7 +25,7 @@ class TaskRequest extends FormRequest
 
             'title' => 'required|max:20|unique:tasks',
             'description' => 'required|max:50',
-            'due_date' => 'required|max:255',
+            'due_date' => 'required|date|after:now',
         ];
     }
 
