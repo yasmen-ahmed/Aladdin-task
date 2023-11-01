@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,28 +23,22 @@ class TaskController extends Controller
         }
 
         
-public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required|max:255',
-        'description' => 'nullable',
-        'due_date' => 'nullable|max:255',
-    ]);
+        public function store(TaskRequest $request )
+            {
 
-    $user = Auth::user();
+                $user = Auth::user();
+                // $task = Task::create($request->validated());
+                $task = new Task([
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'due_date' => $request->due_date,
+                ]);
+            
+                $task->user()->associate($user);
+                $task->save();
 
-    $task = new Task([
-        'title' => $request->title,
-        'description' => $request->description,
-        'due_date' => $request->due_date,
-    ]);
-
-    // $user->tasks()->save($task);
-    $task->user()->associate($user);
-    $task->save();
-
-    return redirect()->route('tasks.index')->with('success', 'Task created successfully');
-}
+                return redirect()->route('tasks.index')->with('success', 'Task created successfully');
+            }
 
         public function edit(Task $task)
         {
@@ -58,13 +53,8 @@ public function store(Request $request)
         }
 
 
-        public function update(Request $request, Task $task)
+        public function update(TaskRequest $request, Task $task)
             {
-                $request->validate([
-                    'title' => 'required|max:255',
-                    'description' => 'nullable',
-                    'due_date' => 'nullable|max:255',
-                ]);
 
                 // Get the authenticated user
                 $user = auth()->user();

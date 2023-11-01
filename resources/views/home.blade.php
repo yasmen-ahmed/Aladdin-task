@@ -15,6 +15,10 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <br>
+                    <br>
+
+                    <a href="{{ route('tasks.index') }}" class="btn btn-secondary mb-3">Go to Your Tasks</a>
                 </div>
             </div>
         </div>
